@@ -1,1 +1,10 @@
 # week4-contract-practice
+- [Mapping | Solidity 0.8](https://www.youtube.com/watch?v=Q-wRG7pngn0)
+- [Storage, Memory and Calldata | Solidity 0.8](https://www.youtube.com/watch?v=wOCIhzAuhgs)
+- [Error | Solidity 0.8](https://www.youtube.com/watch?v=59MRDldSItU)
+- [Interface | Solidity 0.8](https://www.youtube.com/watch?v=tbjyc-VQaQo)
+- [Calling Parent Constructors | Solidity 0.8](https://www.youtube.com/watch?v=nPtEpw4olSk)
+- [Calling Parent Function | 0.8](https://www.youtube.com/watch?v=lqRYnIejWMk)
+- [Inheritance | Solidity 0.8](https://www.youtube.com/watch?v=Ck5PUwL2D6I)
+- [Multiple Inheritances | Solidity 0.8](https://www.youtube.com/watch?v=ITxPOG9Djwc)
+- [Library | Solidity 0.8](https://www.youtube.com/watch?v=OH5mafV6jVE)
