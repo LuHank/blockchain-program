@@ -8,21 +8,21 @@ contract Structs {
         address owner;
     }
 
-    Car public car;
-    Car[] public cars;
-    mapping(address => Car[]) public carsByOwner;
+    Car public car; // 宣告 struct 變數
+    Car[] public cars; // 宣告 struct array 變數
+    mapping(address => Car[]) public carsByOwner; // 宣告 struct array mapping
 
     function examples() external {
-        Car memory toyota = Car("Toyota", 1990, msg.sender);
-        Car memory lambo = Car({year: 1980, model: "Lamborghini", owner: msg.sender});
-        Car memory tesla; // 宣告 default value
-        tesla.model = "Tesla"; // update struct
-        tesla.year = 2010;
-        tesla.owner = msg.sender;
+        Car memory toyota = Car("Toyota", 1990, msg.sender); // 賦予 struct 變數值
+        Car memory lambo = Car({year: 1980, model: "Lamborghini", owner: msg.sender}); // 賦予 struct 變數值
+        Car memory tesla; // 宣告 struct 變數 - default value
+        tesla.model = "Tesla"; // update struct 變數 field
+        tesla.year = 2010; // update struct 變數 field 
+        tesla.owner = msg.sender; // update struct 變數 field
 
-        cars.push(toyota); // push
-        cars.push(lambo);
-        cars.push(tesla);
+        cars.push(toyota); // struct 變數加入 struct array - push
+        cars.push(lambo); // struct 變數加入 struct array - push
+        cars.push(tesla); // struct 變數加入 struct array - push
 
         cars.push(Car("Ferrari", 2020, msg.sender)); // 也可以直接 push ，就跟上面一樣是存在 memory
 
