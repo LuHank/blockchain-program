@@ -1,5 +1,7 @@
 pragma solidity ^0.4.25;
 
+// 多人遊戲 (殭屍 ID 的擁有者(帳號), 帳號擁有的殭屍數量)
+
 contract ZombieFactory {
 
     event NewZombie(uint zombieId, string name, uint dna);
@@ -15,7 +17,7 @@ contract ZombieFactory {
     Zombie[] public zombies;
 
     // 多人遊戲 - 提供殭屍
-    mapping (uint => address) public zombieToOwner; // 帳號擁有的殭屍 ID
+    mapping (uint => address) public zombieToOwner; // 殭屍 ID 的擁有者(帳號)
     mapping (address => uint) ownerZombieCount; // 帳號擁有殭屍數量
 
     function _createZombie(string _name, uint _dna) private {

@@ -1,5 +1,8 @@
 pragma solidity ^0.4.25;
 import "./zombiefactory.sol";
+
+// 實作利用 interface 與其他合約互動 - 宣告 interface 變數並指定 CryptoKitties 合約地址
+
 contract KittyInterface {
   function getKitty(uint256 _id) external view returns (
     bool isGestating,

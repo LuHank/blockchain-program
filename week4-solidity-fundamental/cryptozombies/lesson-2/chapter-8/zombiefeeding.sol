@@ -1,5 +1,9 @@
 pragma solidity ^0.4.25;
 import "./zombiefactory.sol";
+
+// feedAndMultiply - 生成新 DNA (殭屍 DNA + 餵食 DNA) 並創建新殭屍
+// 補充：確保餵食的 DNA 只有 16 digits 。
+
 contract ZombieFeeding is ZombieFactory {
 
   function feedAndMultiply(uint _zombieId, uint _targetDna) public {

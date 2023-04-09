@@ -1,5 +1,7 @@
 pragma solidity ^0.4.25;
 
+// _createZombie private function - 儲存帳號擁有的殭屍 ID, 儲存帳號擁有的殭屍數量
+
 contract ZombieFactory {
 
     event NewZombie(uint zombieId, string name, uint dna);

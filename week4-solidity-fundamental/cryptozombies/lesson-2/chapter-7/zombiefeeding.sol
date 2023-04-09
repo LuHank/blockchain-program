@@ -1,5 +1,11 @@
 pragma solidity ^0.4.25;
 import "./zombiefactory.sol";
+
+// feedAndMultiply - 賦予殭屍餵食及繁殖能力
+// 補充： 
+// 1. function 內操作 struct, arry 才需要標示清楚 data location (storage, memory, calldata)
+// 2. 其他狀況不需特別標示，例如 宣告變數 在 function 外面其預設就會是 storage ，宣告變數在 functions 內部其預設就會是 memory 。 
+
 contract ZombieFeeding is ZombieFactory {
   // give our zombies the ability to feed and multiply!
   function feedAndMultiply(uint _zombieId, uint _targetDna) public {

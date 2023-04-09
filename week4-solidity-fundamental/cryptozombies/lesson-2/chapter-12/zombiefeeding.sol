@@ -1,5 +1,8 @@
 pragma solidity ^0.4.25;
 import "./zombiefactory.sol";
+
+// 呼叫 CryptoKitties 合約的 getKitties function 得到 CryptoKitties 並餵食給殭屍建立新殭屍
+
 contract KittyInterface {
   function getKitty(uint256 _id) external view returns (
     bool isGestating,

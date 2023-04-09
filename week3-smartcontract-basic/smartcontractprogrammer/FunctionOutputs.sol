@@ -19,8 +19,9 @@ contract FunctionOutputs {
         b = true;
     }
 
-    function destructingAssignments() public pure {
+    function destructingAssignments() public pure returns (uint, bool, bool) {
         (uint x, bool b) = returnMany();
         (, bool _b) = returnMany(); // 只要取得第 2 個 return value
+        return (x, b, _b);
     }
 }

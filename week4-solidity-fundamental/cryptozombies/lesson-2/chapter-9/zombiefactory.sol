@@ -1,4 +1,7 @@
 pragma solidity ^0.4.25;
+
+// _createZombie function 修改 visibility 。 改成可被繼承合約呼叫的 internal 。 (原為 private )
+
 contract ZombieFactory {
 
     event NewZombie(uint zombieId, string name, uint dna);

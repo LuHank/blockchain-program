@@ -1,7 +1,7 @@
 pragma solidity ^0.4.25;
 
 // 讓 _generateRandomDna function 回傳半隨機 uint 
-// 以太坊內置哈希函數 keccak256，它是 SHA3 的一個版本。哈希函數基本上將輸入映射為隨機的 256 位十六進制數。
+// 以太坊內置哈希函數 keccak256，它是 SHA3 的一個版本。哈希函數基本上將輸入映射為隨機的 64 位十六進制數 ( 256 bit )。
 // 輸入的微小變化將導致哈希值發生較大變化。
 // 目前拿來使用產生偽隨機數 ( pseudo-random ) 。
 // keccak256() 傳入參數需為 bytes ，所以須先將資料打包成 bytes 。

@@ -1,5 +1,8 @@
 pragma solidity ^0.4.25;
 
+// createRamdomZombie public function - 限制一個帳號只能生成一隻殭屍
+// 補充： Solidity 無法比較原生字串，須把兩個字串經過 keecak256 hash 後比較。 (參考最後的說明)
+
 contract ZombieFactory {
 
     event NewZombie(uint zombieId, string name, uint dna);

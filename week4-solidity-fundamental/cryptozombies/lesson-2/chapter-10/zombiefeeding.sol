@@ -1,5 +1,8 @@
 pragma solidity ^0.4.25;
 import "./zombiefactory.sol";
+
+// 餵食僵屍的食物 - CryptoKitties - 利用 interface 與其他合約互動。
+
 // 殭屍吃甚麼？ CryptoKitties (需要呼叫 CryptoKitties 的 getKitty function) - 與其他合約互動，需要宣告一個 interface 。 
 contract KittyInterface {
   function getKitty(uint256 _id) external view returns (

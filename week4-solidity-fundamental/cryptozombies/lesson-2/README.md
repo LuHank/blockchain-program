@@ -1,5 +1,5 @@
 # week4 - cryptozombies lesson 2
-- chapter-2: 多人遊戲 (帳號擁有的殭屍 ID, 帳號擁有的殭屍數量)
+- chapter-2: 多人遊戲 (殭屍 ID 的擁有者(帳號), 帳號擁有的殭屍數量)
 - chapter-3: _createZombie private function - 儲存帳號擁有的殭屍 ID, 儲存帳號擁有的殭屍數量
 - chapter-4: createRamdomZombie public function - 限制一個帳號只能生成一隻殭屍
   補充： Solidity 無法比較原生字串，須把兩個字串經過 keecak256 hash 後比較。

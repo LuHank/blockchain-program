@@ -1,5 +1,7 @@
 pragma solidity ^0.4.25;
 
+// ZombieFeeding contract - 繼承
+
 contract ZombieFactory {
 
     event NewZombie(uint zombieId, string name, uint dna);

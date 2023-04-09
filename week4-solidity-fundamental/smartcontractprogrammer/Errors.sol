@@ -17,7 +17,7 @@ contract Errors {
         if (_i <= 10) {
             count += 1; // 1st - 43686, then - gas 26586 gas, pass 0 - 26574 gas
         } else {
-            // Goerli 測試鏈場景：若 count > 1 則小狐狸會出現 We were not able to estimate gas. There might be an error in the contract and this transaction may fail.
+            // Goerli 測試鏈場景：若 count < 1 則小狐狸會出現 We were not able to estimate gas. There might be an error in the contract and this transaction may fail.
             // 而且若硬要執行交易， gas fee 爆高。(1.07087677GoerliETH - 正常才 0.0.00149844GoerliETH)
             // require(count > 1, unicode"count 不可小於等於 1"); // noPass - 23700 gas, pass - 26695 gas
             count -= 1; // 如果 count <= 1 ，則不會執行此段程式碼。 // 若沒有上一行 require 控制，且當 count = 0 - 1 後，則交易會失敗且須支付 23676 gas 。
