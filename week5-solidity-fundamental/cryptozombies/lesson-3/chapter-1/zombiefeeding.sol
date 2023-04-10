@@ -1,5 +1,12 @@
 pragma solidity ^0.4.25;
 import "./zombiefactory.sol";
+
+// 呼叫外部合約方法且合約地址可改變
+// 1. 宣告外部合約(contract NameInterface {})包含會用到的 function
+// 2. 宣告合約變數
+// 3. 可改變合約地址的 function (合約變數 = 外部合約(address))
+// 4. 呼叫外部合約方法 (外部合約變數.function())
+
 contract KittyInterface {
   function getKitty(uint256 _id) external view returns (
     bool isGestating,

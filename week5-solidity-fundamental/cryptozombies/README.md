@@ -1,18 +1,18 @@
 # week5 - cryptozombies lesson 3  
-Chapter 1: Immutability of Contracts  
-Chapter 2: Ownable Contracts  
-Chapter 3: onlyOwner Function Modifier  
-Chapter 4: Gas  
-Chapter 5: Time Units  
-Chapter 6: Zombie Cooldowns  
-Chapter 7: Public Functions & Security  
-Chapter 8: More on Function Modifiers  
-Chapter 9: Zombie Modifiers  
-Chapter 10: Saving Gas With 'View' Functions  
-Chapter 11: Storage is Expensive  
-Chapter 12: For Loops  
-Chapter 13: Wrapping It Up 總結  
-    recap (回顧) :  
+- Lesson 3 - Chapter 1: Immutability of Contracts  
+- Lesson 3 - Chapter 2: Ownable Contracts  
+- Lesson 3 - Chapter 3: onlyOwner Function Modifier  
+- Lesson 3 - Chapter 4: Gas  
+- Lesson 3 - Chapter 5: Time Units  
+- Lesson 3 - Chapter 6: Zombie Cooldowns (Passing structs as arguments)  
+- Lesson 3 - Chapter 7: Public Functions & Security  
+- Lesson 3 - Chapter 8: More on Function Modifiers  
+- Lesson 3 - Chapter 9: Zombie Modifiers  
+- Lesson 3 - Chapter 10: Saving Gas With 'View' Functions  
+- Lesson 3 - Chapter 11: Storage is Expensive  
+- Lesson 3 - Chapter 12: For Loops  
+- Lesson 3 - Chapter 13: Wrapping It Up 總結  
+  recap (回顧) :  
         - 增加一種方法可以更新 CyptoKitties contract address  
         - 學習到如何利用 onlyOwner 保護核心 functoin  
         - 學習到甚麼是 gas 為何需要 gas 以及如何優化 gas  

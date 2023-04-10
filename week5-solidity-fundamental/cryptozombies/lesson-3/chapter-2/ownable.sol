@@ -62,7 +62,7 @@ contract Ownable {
   * It will not be possible to call the functions with the `onlyOwner`
   * modifier anymore.
   */
-  function renounceOwnership() public onlyOwner {
+  function renounceOwnership() public onlyOwner { // 放棄擁有者
     emit OwnershipTransferred(_owner, address(0));
     _owner = address(0);
   }

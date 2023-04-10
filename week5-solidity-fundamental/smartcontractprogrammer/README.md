@@ -1,4 +1,4 @@
-# week5-contract-practice  
+# week5-solidity-fundamental  
 - [View and Pure Functions | Solidity 0.8](https://www.youtube.com/watch?v=vOmXqJ4Qzbc)  
 - [Function Modifier | Solidity 0.8](https://www.youtube.com/watch?v=b6FBWsz7VaI)  
 - [Visibility | Solidity 0.8](https://www.youtube.com/watch?v=f4sD6F-OhMY)  

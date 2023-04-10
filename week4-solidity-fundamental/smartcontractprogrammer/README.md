@@ -1,4 +1,4 @@
-# week4-contract-practice  
+# week4-solidity-fundamental  
 - [Mapping | Solidity 0.8](https://www.youtube.com/watch?v=Q-wRG7pngn0)  
 - [Storage, Memory and Calldata | Solidity 0.8](https://www.youtube.com/watch?v=wOCIhzAuhgs)  
 - [Error | Solidity 0.8](https://www.youtube.com/watch?v=59MRDldSItU)  

@@ -1,15 +1,14 @@
 # week3 - cryptozombies lesson 1  
-Chapter 1: Lesson Overview  
-Chapter 2: Contracts  
-Chapter 3: State Variables & Integers  
-Chapter 4: Math Operations  
-Chapter 5: Structs  
-Chapter 6: Arrays  
-Chapter 7: Function Declarations  
-Chapter 8: Working With Structs and Arrays  
-Chapter 9: Private / Public Functions  
-Chapter 10: More on Functions  
-Chapter 11: Keccak256 and Typecasting  
-Chapter 12: Putting It Together  
-Chapter 13: Events  
-Chapter 14: Web3.js  
+- Lesson 1 - Chapter 2: Contract  
+- Lesson 1 - Chapter 3: State Variables & Integers  
+- Lesson 1 - Chapter 4: Math Operations  
+- Lesson 1 - Chapter 5: Structs  
+- Lesson 1 - Chapter 6: Arrays  
+- Lesson 1 - Chapter 7: Function Declarations  
+- Lesson 1 - Chapter 8: Working With Structs and Arrays  
+- Lesson 1 - Chapter 9: Private / Public Functions  
+- Lesson 1 - Chapter 10: More on Functions  
+- Lesson 1 - Chapter 11: Keccak256 and Typecasting  
+- Lesson 1 - Chapter 12: Putting It Together  
+- Lesson 1 - Chapter 13: Events  
+- Lesson 1 - Chapter 14: Web3.js  

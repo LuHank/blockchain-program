@@ -18,7 +18,7 @@ contract AccessControl {
     // USER hash value: 0x2db9fd3d099848027c2383d0a083396f6c41510d7acfd92adc99b6cffcf31e96
     bytes32 private constant USER = keccak256(abi.encodePacked("USER"));
     // 為了得到 hash value 暫時將上面兩個 variable 宣告為 public ，得到後再改回 public 。
-    // 為何要這樣做，因為 function inputs 都是 bytes32 ，也就是 編碼後的 hash value 。
+    // 為何要這樣做，因為 function inputs 都是 bytes32 ，也就是編碼後的 hash value 。
     // bytes32 public constant ADMIN = keccak256(abi.encodePacked("ADMIN"));
     // bytes32 public constant USER = keccak256(abi.encodePacked("USER"));
 

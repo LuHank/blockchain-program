@@ -1,0 +1,14 @@
+# week6 - cryptozombies lesson 4  
+- Lesson 4 - Chapter 1: Payable  
+- Lesson 4 - Chapter 2: Withdraws  
+- Lesson 4 - Chapter 3: Zombie Battles  
+- Lesson 4 - Chapter 4: Random Number  
+- Lesson 4 - Chapter 5: Zombie Fightin'  
+- Lesson 4 - Chapter 6: Refactoring Common Logic (require)  
+- Lesson 4 - Chapter 7: More Refactoring (modifier)  
+- Lesson 4 - Chapter 8: Back to Attack!  
+- Lesson 4 - Chapter 9: Zombie Wins and Losses  
+- Lesson 4 - Chapter 10: Zombie Victory 😄  
+- Lesson 4 - Chapter 11: Zombie Loss 😞  
+- Advanced Crypto Zombie - Data feed and computation  
+- How to build an Oracle Lesson 1-3  

@@ -1,4 +1,4 @@
-# week3-contract-practice  
+# week3-smartcontract-basic    
 - [State Variables | Solidity 0.8](https://www.youtube.com/watch?v=hl692-xJPUQ)  
 - [Local Variables | Solidity 0.8](https://www.youtube.com/watch?v=5Gxzwn0SQDU)  
 - [Global Variables | Solidity 0.8](https://www.youtube.com/watch?v=ryA86ZiSD-w)  

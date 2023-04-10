@@ -44,11 +44,11 @@ contract ZombieHelper is ZombieFeeding {
     zombies[_zombieId].dna = _newDna;
   }
 
-  // iterate 所有 zombies，比較僵屍對應的 owner 是否匹配，如果是就加入 result array 。
+  // iterate (遍歷) 所有 zombies，比較僵屍對應的 owner 是否匹配，如果是就加入 result array 。
   // 同樣獲取使用者僵屍軍團，但比上面方法便宜，因為不會使用到 mapping storage 及寫入 mapping storage 。
   function getZombiesByOwner(address _owner) external view returns(uint[]) {
-    uint[] memory result = new uint[](ownerZombieCount[_owner]);
-    uint counter = 0;
+    uint[] memory result = new uint[](ownerZombieCount[_owner]); // 存放殭屍 ID
+    uint counter = 0; // 存放擁有殭屍的索引
     for (uint i = 0; i < zombies.length; i++) {
       if (zombieToOwner[i] == _owner) {
         result[counter] = i;

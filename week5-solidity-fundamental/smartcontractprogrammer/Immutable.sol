@@ -4,7 +4,7 @@ pragma solidity ^0.8.7;
 contract Immutable {
     // immutable state variable 就像常數，除了我們只能設定一次當合約被部署時。
     // 除了部署合約時可以初始化，之後就都不能修改了。所以很多合約都用來在 constructor 初始化 immutable state variable 。
-    // 好處： function 使用 state variable 可以節省 gas 。
+    // 好處： function 使用 state variable 宣告為 immutable 可以節省 gas 。
     address public immutable owner = msg.sender;
 
     // 就像常數，除了我們只能設定一次當合約被部署時。

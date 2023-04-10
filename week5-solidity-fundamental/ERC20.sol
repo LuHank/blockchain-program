@@ -8,6 +8,23 @@ pragma solidity ^0.8.10;
 // function visibility - external 比 public 便宜
 // EIP20 function 都是 public - https://eips.ethereum.org/EIPS/eip-20
 // OpenZeppelin 實作也都是 public - https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol
+
+// source code
+// 1. interface IERC20
+// 2. 實作 varialbes
+//    - totalSupply
+//    - balanceOf mapping (address => uint)
+//    - allowance mapping (address => mapping (address => uint))
+//    - name
+//    - symbol
+//    - decimal
+// 3. 實作 function
+//    - transfer(): sender balance 減少 / recipient balance 增加, 觸發 Transfer event
+//    - approve(): holder give allowance to sender for amount, 觸發 Approval event
+//    - transferFrom(): allowance amount 減少 / holder balance 減少 / recipietn balance 增加, 觸發 Transfer event
+//    - mint(): msg.sender balance 增加 / totalSupply 增加, 觸發 Transfer event (address(0) -> msg.sender)
+//    - burn(): msg.sender balance 減少 / totalSupply 減少, 觸發 Transfer event (sg.sender > address(0))
+
 interface IERC20 {
     function totalSupply() external view returns (uint);
 
