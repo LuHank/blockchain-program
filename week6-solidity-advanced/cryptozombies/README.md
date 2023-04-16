@@ -10,5 +10,10 @@
 - Lesson 4 - Chapter 9: Zombie Wins and Losses  
 - Lesson 4 - Chapter 10: Zombie Victory 😄  
 - Lesson 4 - Chapter 11: Zombie Loss 😞  
-- Advanced Crypto Zombie - Data feed and computation  
-- How to build an Oracle Lesson 1-3  
+- Lesson 4 - Chapter 12: Wrapping It Up 總結  
+  recap (回顧) : 僵屍贏了  
+    - 僵屍升級  
+    - 僵屍增加 winCount  
+    - 產生一隻物種為 zombie 的新殭屍(且根據自己僵屍 ID 及對手殭屍 DNA)  
+- Chainlink: Decentralized Oracles - Data feed and computation  
+- Advanced Solidity: Get In-depth Knowledge - How to build an Oracle Lesson 1-3  

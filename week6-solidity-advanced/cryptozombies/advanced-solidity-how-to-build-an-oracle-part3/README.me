@@ -1,0 +1,21 @@
+# How to Build an Oracle - Part 3  
+**decentralized oracle**  
+your oracle is still somehow centralized, meaning that only the owner is allowed to update the ETH price.  
+make your oracle more decentralized  
+Chapter 1: Using Roles  
+Chapter 2: Using Constructor to Set the Owner  
+    - EthPriceOracle\oracle\migrations\2_eth_price_oracle.js 修改  
+      增加傳入 owner address  
+      deployer.deploy(EthPriceOracle, '0xb090d88a3e55906de49d76b66bf4fe70b9d6d708')  
+    - EthPriceOracle.sol 增加 constructor 且可傳入 owner address 以決定 owner  
+Chapter 3: Setting Up New Oracles  
+Chapter 4: The Logical NOT Operator  
+Chapter 5: Removing an Oracle  
+Chapter 6: Keeping Track of Responses  
+Chapter 7: Computing the ETH Price  
+Chapter 8: Computing the ETH Price- Cont'd  
+Chapter 9: Using SafeMath  
+Chapter 10: Using SafeMath  
+    - Delete the id key from the requestIdToResponse.  
+    - Update setLatestEthPrice function so that it calls callerContractInstance.callback with computedEthPrice.  
+    - The first argument passed to SetLatestEthPriceEvent should be computedEthPrice  
