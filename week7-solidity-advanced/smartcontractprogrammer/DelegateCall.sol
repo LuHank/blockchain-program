@@ -28,7 +28,7 @@ A ----> B ----> C
 // 例如在最前面加一個 state variables 就會得到奇怪的結果。
 // 但若加在最後則不影響。
 contract TestDelegateCall {
-    // 如果加這行就會造成以下三個變數值會得到奇怪的值
+    // 如果加這行就會造成 DelegateCall contract 以下三個變數值會得到奇怪的值
     // address public owner;
     uint public num;
     address public sender;
