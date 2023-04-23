@@ -27,6 +27,7 @@ contract Fallback {
     // 1. 當呼叫此合約未存在的 function 例如 foo() ，就會呼叫 fallback() 。
     // 2. 當 EOA 或者 contract 傳 ETH(ether) ，則 fallback() 將會被執行。
     //    為了能夠讓 contract 能夠接收 ether 則需把 fallback() 宣告為 payable。
+    // 若 msg.data 不為空會呼叫 fallback function ，但若未宣告 fallback function 則會顯示 'Fallback' function is not defined
     fallback() external payable {
         emit Log("fallback", msg.sender, msg.value, msg.data);
     }
