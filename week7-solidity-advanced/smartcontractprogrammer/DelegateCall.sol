@@ -57,6 +57,9 @@ contract DelegateCall {
         // );
         // 可以不用寫 string
         // 好處是如果改了 function signature ，例如修改參數，則以下方法不用更動，但上一個方法則要更動。
+        // contractAddress.delegatecall(abi.encodeWithSignature(”implementation contract’s function signature”), _num)
+        // proxyContractAddress.delegatecall(abi.encodeWithSignature(implementationContractAddress.functionName.selector), _num)
+        // proxyContractAddress.delegatecall(abi.encodeWithSignature(implementationContractInstance.functionName.selector), _num)
         (bool success, bytes memory data) = _test.delegatecall(
             abi.encodeWithSelector(TestDelegateCall.setVars.selector, _num)
         );
