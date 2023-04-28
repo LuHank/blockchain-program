@@ -28,6 +28,14 @@ pragma solidity ^0.8.13;
 //     - 將其他外部 function 改成需 ifAdmin
 // - part5: Proxy admin
 //   - proxy admin contract will be the admin of proxy contract
+//     - 有一個問題: 因為 Proxy contract 已經有 admin, implementaion function ， admin 無法呼叫 implementation contract's admin, implementation function
+//       - 如何解決？
+//       - 新增 proxy admin contract 作為 Proxy contract's admin
+//         proxy admin contract's owner 可以呼叫 Proxy contract's admin, implementation
+//         其他人則導流到呼叫 implementation contract's admin, implementation
+//         - Proxy contract 新增 changeAdmin function
+//           一旦 deploy Proxy contract and proxy admin contract, 就呼叫 changeAdmin(proxy admin contract address)
+//         - 新增 ProxyAdmin contract
 // - Demo
 
 contract CounterV1 {
@@ -198,14 +206,54 @@ contract Proxy {
         // StorageSlot.getAddressSlot(SLOT) 會回傳 pointer
         StorageSlot.getAddressSlot(IMPLEMENTATION_SLOT).value = _implementation;
     }
-
+    // 以下這兩個要改成 read-only function
+    // 當初要移除 view 的原因是加入 modifier 會潛在有可能呼叫 fallback function 
     // function Admin() external view returns(address) {
-    function Admin() external ifAdmin returns(address) {
+    function admin() external ifAdmin returns(address) {
         return _getAdmin();
     }
 
-    function Implementation() external ifAdmin returns(address) {
+    function implementation() external ifAdmin returns(address) {
         return _getImplementation();
+    }
+}
+
+contract ProxyAdmin {
+    address public owner;
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        require(msg.sender == owner, "not authorized");
+        _;
+    }
+
+    function getProxyAdmin(address proxy) external view returns (address) {
+        // staticcall 就像 call 只是不能寫資料到區塊鏈
+        // 傳入 Proxy admin() 另外 () 代表此 function 不用傳入任何參數
+        (bool ok, bytes memory res) = proxy.staticcall(abi.encodeCall(Proxy.admin, ()));
+        require(ok, "staticcall failed");
+        // 因為 admin function 是回傳 address
+        return abi.decode(res, (address));
+    }
+    
+    function getProxyImplementaiton(address proxy) external view returns (address) {
+        // staticcall 就像 call 只是不能寫資料到區塊鏈
+        // 傳入 Proxy admin() 另外 () 代表此 function 不用傳入任何參數
+        (bool ok, bytes memory res) = proxy.staticcall(abi.encodeCall(Proxy.implementation, ()));
+        require(ok, "staticcall failed");
+        // 因為 admin function 是回傳 address
+        return abi.decode(res, (address));
+    }
+
+    // 參數 proxy address 宣告為 payable 的原因: 因為 Proxy contract 有 fallback, receive function - 都宣告為 payable
+    function changeProxyAdmin(address payable proxy, address _admin) external onlyOwner {
+        Proxy(proxy).changeAdmin(_admin);
+    }
+
+    function upgrade(address payable proxy, address implementation) external onlyOwner {
+        Proxy(proxy).upgradeTo(implementation);
     }
 }
 
@@ -237,6 +285,28 @@ contract TestSlot {
         StorageSlot.getAddressSlot(SLOT).value = _addr;
     }    
 }
+
+// part5 執行 - 
+// 部署: CounterV1, CounterV2, Proxy, ProxyAdmin
+// 執行 Proxy - upgradeTo(CounterV1 address)
+// 執行 Proxy - changeAdmin(ProxyAdmin address) => Proxy's admin 變成 ProxyAdmin contract
+//      如果沒有修改 Proxy admin 就執行 getProxyAdmin(Proxy address) 會出現 "staticcall failed"
+//      因為 staticcall 呼叫 Proxy's admin function 會有 onlyOwner modifier 但此時 Proxy admin 為 EOA 而非 ProxyAdmin contract
+// 執行 ProxyAdmin - getProxyAdmin(Proxy address) => return ProxyAdmin address
+// 執行 ProxyAdmin - getProxyImplementation(Proxy address) => return CounterV1 address
+// 切換到 CounterV1 並 At Address(Proxy address) - load CounterV1 interface at Proxy address
+// 執行 NEW CounterV1 - count => 0
+// 執行 NEW CounterV1 - inc()
+// 執行四次 NEW CounterV1 - count => 4
+// 執行 ProxyAdmin - upgrade(Proxy address, CounterV2 address) => upgrade Proxy to CounterV2
+// 切換到 CounterV2 並 At Address(Proxy address) => load CounterV2 interface at Proxy address
+//     若沒有做上一個動作，執行 dec() 會出現以下錯誤 => why ?
+//     revert
+// 	    The transaction has been reverted to the initial state.
+//     Note: The called function should be payable if you send value and the value you send should be less than your current balance.
+// 執行 CounterV2 - count => 4
+// 執行兩次 CounterV2 - dec()
+// 執行 CounterV2 - count => 2
 
 // part4-1 執行 - 把 Proxy contract's admin(), implementation() 複製到 CounterV1 並修改 return 值
 // 部署: Proxy contract, CounterV1 contract

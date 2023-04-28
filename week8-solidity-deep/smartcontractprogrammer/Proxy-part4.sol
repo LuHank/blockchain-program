@@ -13,7 +13,21 @@ pragma solidity ^0.8.13;
 //     - create library
 //   - address for the implementation and admin
 // - part4: Seperate user / admin interfaces
+//   - 如果是 admin 就可以呼叫 proxy contract functions 
+//   - 如果是 user 則轉到只能呼叫 implementation contract
+//   - 想要 Proxy contract's admin(), implementation() 也可以在 implementation contract ，甚至想要在 implementation contract 也可以執行此兩個在 Proxy contract 的 function 。 
+//     糟糕的是 implementation contract 沒有相同的 function => 只要相同的 function selector 就可以在 implementation contract 執行 Proxy contract function 。
+//   - 把 funcction 複製到 implementation contract => 但會有問題是因為 function selector 都相同，仍然執行的是 Proxy contract function 而不是 implementation contract function 。
+//   - 解決就是另外建立 proxy admin contract 作為 Proxy contract's admin
+//     - Proxy contract's owner 執行 Proxy contract's admin(), implementation()
+//     - Proxy contract's user 執行 implementation's admin(), implementation()
+//   - 解決 detail
+//     - IMPLEMENTATION_SLOT, ADMIN_SLOT: public -> private
+//     - 增加 changeAdmin() and ifAdmin modifier
+//       - 增加 _fallback() 可以讓內部呼叫 delegatecall to implementation contract
+//     - 將其他外部 function 改成需 ifAdmin
 // - part5: Proxy admin
+//   - proxy admin contract will be the admin of proxy contract
 // - Demo
 
 contract CounterV1 {
@@ -23,6 +37,14 @@ contract CounterV1 {
 
     function inc() external {
         count += 1;
+    }
+
+    function Admin() external view returns(address) {
+        return address(1);
+    }
+
+    function Implementation() external view returns(address) {
+        return address(2);
     }
 }
 
@@ -46,11 +68,13 @@ contract Proxy {
     // address public admin;
     // 決定儲存 address 的 slot 在哪
     // 遵循 OpenZeppelin transparent upgradeable proxy contract 存到特殊的地方
-    bytes32 public constant IMPLEMENTATION_SLOT = bytes32(
+    // bytes32 public constant IMPLEMENTATION_SLOT = bytes32(
+    bytes32 private constant IMPLEMENTATION_SLOT = bytes32(
         // 扣除 1 就會變隨機不可預測 => 增加碰撞攻擊難度
         uint(keccak256("eip1967.proxy.implementation")) - 1
     );
-    bytes32 public constant ADMIN_SLOT = bytes32(
+    // bytes32 public constant ADMIN_SLOT = bytes32(
+    bytes32 private constant ADMIN_SLOT = bytes32(
         // 扣除 1 就會變隨機不可預測 => 增加碰撞攻擊難度
         uint(keccak256("eip1967.proxy.admin")) - 1
     );
@@ -59,6 +83,15 @@ contract Proxy {
     constructor() {
         // admin = msg.sender;
         _setAdmin(msg.sender);
+    }
+
+    modifier ifAdmin() {
+        if (msg.sender == _getAdmin()) {
+            _;
+        } else {
+            // 若不是 admin 則導流到 _fallback() 執行 implementaion function
+            _fallback();
+        }
     }
 
     function _delegate(address _implementation) private {
@@ -116,19 +149,27 @@ contract Proxy {
 
     }
 
+    // 因為 fallback() 不能為內部呼叫因此新建一個 private function _fallback
+    function _fallback() private {
+        _delegate(_getImplementation());
+    }
+
     // 如果要呼叫其他 function 例如 inc() or count() 則把 request 轉到 fallback()
     fallback() external payable {
         // _delegate(implementation);
-        _delegate(_getImplementation());
+        // _delegate(_getImplementation());
+        _fallback();
     }
     // msg.data 為空時會呼叫 receive()
     receive() external payable {
         // _delegate(implementation);
-        _delegate(_getImplementation());
+        // _delegate(_getImplementation());
+        _fallback();
     }
 
-    function upgradeTo(address _implementation) external {
-        require(msg.sender == _getAdmin(), "not authorized");
+    // function upgradeTo(address _implementation) external {
+    function upgradeTo(address _implementation) external ifAdmin {
+        // require(msg.sender == _getAdmin(), "not authorized");
         // implementation = _implementation;
         _setImplementation(_implementation);
     }
@@ -154,11 +195,12 @@ contract Proxy {
         StorageSlot.getAddressSlot(IMPLEMENTATION_SLOT).value = _implementation;
     }
 
-    function admin() external view returns(address) {
+    // function Admin() external view returns(address) {
+    function admin() external ifAdmin returns(address) {
         return _getAdmin();
     }
 
-    function implementation() external view returns(address) {
+    function implementation() external ifAdmin returns(address) {
         return _getImplementation();
     }
 }
@@ -191,6 +233,20 @@ contract TestSlot {
         StorageSlot.getAddressSlot(SLOT).value = _addr;
     }    
 }
+
+// part4-1 執行 - 把 Proxy contract's admin(), implementation() 複製到 CounterV1 並修改 return 值
+// 部署: Proxy contract, CounterV1 contract
+// 執行 Proxy contract's upgradeTo(CounterV1 contract address);
+// Proxy Contract's admin => EOA, implementation => CounterV1 contract address
+// 切換到 CounterV1 且 At Address(Proxy contract address) - 藉由 Proxy contract address 載入已部署的 CounterV1 contract interface
+// CounterV1 Contract's admin => EOA, implementation => CounterV1 contract address 都沒有變
+// part4-2 執行 - admin -> 執行 Proxy contract's functions, user -> 執行 implementation contract's functions
+// 部署: Proxy contract, CounterV1 contract
+// 執行 Proxy contract's upgradeTo(CounterV1 contract address);
+// Proxy Contract's admin => EOA, implementation => CounterV1 contract address
+// 切換到 CounterV1 且 At Address(Proxy contract address) - 藉由 Proxy contract address 載入已部署的 CounterV1 contract interface
+// 使用部署合約的 account: CounterV1 Contract's admin => EOA, implementation => CounterV1 contract address 因為執行 Proxy contract's functions
+// 使用非部署合約的 account: CounterV1 Contract's admin => address(1), implementation => address(2) 因為執行 Proxy contract's functions
 
 // part3-1 執行 - 尚未修改 BuggyProxy
 // 部署 TestSlot
