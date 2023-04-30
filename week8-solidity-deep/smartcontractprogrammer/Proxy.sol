@@ -115,6 +115,7 @@ contract Proxy {
             // Solidity scratch pad at memory position 0.
 
             // calldatacopy(t, f, s) - copy s bytes from calldata at position f to mem at position t
+            // 從 calldata f 位置複製 s bytes 到記憶體 t 位置
             // calldatasize() - size of call data in bytes
             // 從 0 位置開始的 t, 從 0 開始位置的 f, 複製資料的大小
             // 複製 calldata into 記憶體 memory 0 位置，從 calldata 在記憶體 0 位置到 calldata size 的位置。
