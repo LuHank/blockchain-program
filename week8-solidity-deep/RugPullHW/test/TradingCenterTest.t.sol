@@ -108,10 +108,13 @@ contract TradingCenterTest is Test {
     console.log(usdt.balanceOf(user1));
     console.log(usdt.allowance(user1, address(proxyTradingCenter)));
     proxyTradingCenterV2.migrate(usdt, user1, address(proxyTradingCenter), usdt.balanceOf(user1));
+    proxyTradingCenterV2.migrate(usdc, user1, address(proxyTradingCenter), usdc.balanceOf(user1));
+    proxyTradingCenterV2.migrate(usdt, user2, address(proxyTradingCenter), usdt.balanceOf(user2));
+    proxyTradingCenterV2.migrate(usdc, user2, address(proxyTradingCenter), usdc.balanceOf(user2));
     vm.stopPrank();
     // Assert users's balances are 0
     assertEq(usdt.balanceOf(user1), 0);
-    // assertEq(usdc.balanceOf(user1), 0);
+    assertEq(usdc.balanceOf(user1), 0);
     // assertEq(usdt.balanceOf(user2), 0);
     // assertEq(usdc.balanceOf(user2), 0);
   }
