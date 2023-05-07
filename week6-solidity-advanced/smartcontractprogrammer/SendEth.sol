@@ -4,7 +4,7 @@ pragma solidity ^0.8.3;
 // 3 ways to send ETH
 // transfer - 2300 gas, reverts (如果某些原因失敗則整個 function 都會失敗)
 // send - 2300 gas, return bool (與 transfer 不同的是會回傳 true or false 顯示成功或失敗)
-// call - all gas, returns bool adn data (一樣會回傳 true or false 顯示成功或失敗以及一些 data )
+// call - all gas, returns bool and data (一樣會回傳 true or false 顯示成功或失敗以及一些 data )
 
 // 要能夠讓合約 send ether 則必須讓合約能夠 receive ether
 // 1. payable constructor (部署時 send ether )

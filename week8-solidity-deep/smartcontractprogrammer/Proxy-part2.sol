@@ -52,7 +52,7 @@ contract BuggyProxy {
         // 使用 delegatecall 把我們的 call 轉到 implementation contracts
         // (bool ok, bytes memory res) = implementation.delegatecall(msg.data);
         // require(ok, "delegatecall failed");
-        // 當點擊 count 從這裡回傳值 即使此 function 沒有 return
+        // 當點擊 count 從這裡回傳值 即使此 function 沒有 return (因為 fallback 不能 return 造成無法把 implementation's storage 回傳到 proxy)
         // 所以要使用 assembly - OpenZeppelin's transparent upgradeable proxy 
         // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/Proxy.sol
         assembly {
