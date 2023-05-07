@@ -27,7 +27,8 @@ contract FiatTokenProxyTest is Test {
     FiatTokenV3 proxyFiatTokenV3;
 
     function setUp() public {
-        uint256 forkId = vm.createFork("https://eth-mainnet.g.alchemy.com/v2/ZR1nYeq_EaYTkkDe_EivFWzJPbOrvEkV");
+        string memory mainnet_rpc_url = vm.envString("MAINNET_RPC_URL");
+        uint256 forkId = vm.createFork(mainnet_rpc_url);
         vm.selectFork(forkId);
         vm.startPrank(usdc_admin);
         // vm.deal(usdc_admin, 8);

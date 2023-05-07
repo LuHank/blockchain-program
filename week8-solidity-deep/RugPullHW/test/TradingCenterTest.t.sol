@@ -77,17 +77,18 @@ contract TradingCenterTest is Test {
     vm.startPrank(owner);
     // Try to upgrade the proxy to TradingCenterV2
     TradingCenterV2 tradingCenterV2;
+    TradingCenterV2 proxyTradingCenterV2;
     tradingCenterV2 = new TradingCenterV2();
     proxy.upgradeTo(address(tradingCenterV2));
-    proxyTradingCenter = TradingCenterV2(address(proxy));
+    proxyTradingCenterV2 = TradingCenterV2(address(proxy));
     console.log(proxy.getOwner());
     console.log(owner);
     vm.stopPrank();
     // And check if all state are correct (initialized, usdt address, usdc address)
     assertEq(proxy.getOwner(), owner);
-    assertEq(proxyTradingCenter.initialized(), true);
-    assertEq(address(proxyTradingCenter.usdc()), address(usdc));
-    assertEq(address(proxyTradingCenter.usdt()), address(usdt));
+    assertEq(proxyTradingCenterV2.initialized(), true);
+    assertEq(address(proxyTradingCenterV2.usdc()), address(usdc));
+    assertEq(address(proxyTradingCenterV2.usdt()), address(usdt));
   }
 
   function testRugPull() public {

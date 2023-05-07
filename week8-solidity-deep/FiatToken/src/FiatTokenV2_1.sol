@@ -2228,7 +2228,7 @@ contract FiatTokenV2_1 is FiatTokenV2 {
      * @notice Version string for the EIP712 domain separator
      * @return Version string
      */
-    function version() external view returns (string memory) {
+    function version() external pure returns (string memory) {
         return "2";
     }
 }
