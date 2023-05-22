@@ -128,9 +128,20 @@ contract UniswapV2PracticeTest is Test {
         // Implement here
         IUniswapV2Pair wethUsdcPair = IUniswapV2Pair(UNISWAP_V2_FACTORY.getPair(address(WETH9), address(testUSDC)));
         vm.startPrank(maker);
+        (uint112 reserveA, uint112 reserveB,) = wethUsdcPair.getReserves();
+        console.log("reserveA: ", reserveA);
+        console.log("reserveB: ", reserveB);
+        console.log("WETH: ", TestERC20(WETH9).balanceOf(address(wethUsdcPair)));
+        console.log("testUSDC: ", testUSDC.balanceOf(address(wethUsdcPair)));
         uint256 firstLiquidity;
         testUSDC.approve(address(UNISWAP_V2_ROUTER), 10000 * 10 ** testUSDC.decimals());
         (,,firstLiquidity) = UNISWAP_V2_ROUTER.addLiquidityETH{value: 100 * 10 ** 18}(address(testUSDC), 10000 * 10 ** testUSDC.decimals(), 0, 0, maker, block.timestamp * 20);
+        console.log("reserveA: ", reserveA);
+        console.log("reserveB: ", reserveB);
+        console.log("WETH: ", TestERC20(WETH9).balanceOf(address(wethUsdcPair)));
+        console.log("testUSDC: ", testUSDC.balanceOf(address(wethUsdcPair)));
+        // MINIMUM_LIQUIDITY = 10 ** 3
+        // 999999999999000 = Math.sqrt(TestERC20(WETH9).balanceOf(address(wethUsdcPair)).mul(testUSDC.balanceOf(address(wethUsdcPair)))).sub(MINIMUM_LIQUIDITY)
         // (uint112 oReserve0, uint112 oReserve1, ) = wethUsdcPair.getReserves();
         // console.log("oReserve0: ", oReserve0 / (10 ** testUSDC.decimals()));
         // console.log("oReserve1: ", oReserve1 / (10 ** 18));
@@ -149,6 +160,8 @@ contract UniswapV2PracticeTest is Test {
         // address to, => maker
         // uint deadline => block.timestamp
         UNISWAP_V2_ROUTER.removeLiquidityETH(address(testUSDC), firstLiquidity, 0, 0, maker, block.timestamp);
+        console.log("WETH: ", TestERC20(WETH9).balanceOf(address(wethUsdcPair)));
+        console.log("testUSDC: ", testUSDC.balanceOf(address(wethUsdcPair)));
         vm.stopPrank();
         // Checking
         // IUniswapV2Pair wethUsdcPair = IUniswapV2Pair(UNISWAP_V2_FACTORY.getPair(address(WETH9), address(testUSDC)));
