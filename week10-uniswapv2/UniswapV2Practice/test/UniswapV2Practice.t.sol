@@ -142,6 +142,7 @@ contract UniswapV2PracticeTest is Test {
         console.log("testUSDC: ", testUSDC.balanceOf(address(wethUsdcPair)));
         // MINIMUM_LIQUIDITY = 10 ** 3
         // 999999999999000 = Math.sqrt(TestERC20(WETH9).balanceOf(address(wethUsdcPair)).mul(testUSDC.balanceOf(address(wethUsdcPair)))).sub(MINIMUM_LIQUIDITY)
+        // 100000000000000000000 * 10000000000 開根號 = 1000000000000000 - 1000 = 999999999999000
         // (uint112 oReserve0, uint112 oReserve1, ) = wethUsdcPair.getReserves();
         // console.log("oReserve0: ", oReserve0 / (10 ** testUSDC.decimals()));
         // console.log("oReserve1: ", oReserve1 / (10 ** 18));
